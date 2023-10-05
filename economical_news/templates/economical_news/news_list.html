@@ -1,0 +1,12 @@
+<!-- economical_news/templates/economical_news/news_list.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<h2>News List</h2>
+<ul>
+{% for news_item in news_list %}
+    <li>{{ news_item.name_news }} - {{ news_item.category_news }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
