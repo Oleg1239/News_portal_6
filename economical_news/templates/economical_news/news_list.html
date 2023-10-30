@@ -1,12 +1,12 @@
-<!-- economical_news/templates/economical_news/news_list.html -->
-
-{% extends "base.html" %}
+{% extends "economical_news/base.html" %}
 
 {% block content %}
-<h2>News List</h2>
+<h2>Список новостей</h2>
 <ul>
-{% for news_item in news_list %}
-    <li>{{ news_item.name_news }} - {{ news_item.category_news }}</li>
+{% for news_item in news %}
+    <li>
+        <a href="{% url 'news_details' news_item.pk %}">{{ news_item.name_news }}</a> - {{ news_item.category_news }}
+    </li>
 {% endfor %}
 </ul>
 {% endblock %}

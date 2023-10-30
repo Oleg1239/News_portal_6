@@ -3,5 +3,6 @@ from . import views
 
 urlpatterns = [
     path('news/', views.NewsListView.as_view(), name='news_list'),
-    # Добавьте другие маршруты по мере необходимости
+    path('news/<int:pk>/', views.NewsDetailView.as_view(), name='news_details'),
+    # другие пути...
 ]

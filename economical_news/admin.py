@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Author, Category, Post, PostCategory, Comment
+from .models import Author, Category, Post, PostCategory, Comment, News  # Добавьте импорт модели News
 
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('user', 'rating')
@@ -22,8 +22,14 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ('post', 'user')
     search_fields = ('text',)
 
+# Добавлен класс Admin для модели News
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ('title', 'date')
+    search_fields = ('title', 'text')
+
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(PostCategory, PostCategoryAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(News, NewsAdmin)
