@@ -4,20 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мой сайт</title>
+    {% load static %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3pV0NzGs6kC1xPqfD0D5IbgDfE2C2M7z19Rn7 +w/" crossorigin="anonymous">
+    <!-- Пользовательские стили -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <header>
-        <h1>Заголовок сайта</h1>
+        <!-- Использование классов Bootstrap для навигационной панели -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'home' %}">Заголовок сайта</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'home' %}">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'news_list' %}">Новости</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
+                    </li>
+                    <!-- Добавьте дополнительные ссылки по мере необходимости -->
+                </ul>
+            </div>
+        </nav>
     </header>
 
-    <main>
+    <main class="container mt-4">
         {% block content %}
+        <!-- Содержимое будет вставлено сюда из дочерних шаблонов -->
         {% endblock %}
     </main>
 
-    <footer>
-        <p>Футер сайта</p>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">Футер сайта</span>
+        </div>
     </footer>
+
+    <!-- Bootstrap JavaScript и зависимости -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Пользовательские скрипты -->
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
 

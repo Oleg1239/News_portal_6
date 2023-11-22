@@ -61,6 +61,7 @@ class Comment(models.Model):
         self.save()
 
 class News(models.Model):
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=255)
     date = models.DateTimeField(auto_now_add=True)
     text = models.TextField()

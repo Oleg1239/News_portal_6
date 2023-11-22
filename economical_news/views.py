@@ -2,6 +2,10 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from .models import Author, Category, Post, PostCategory, Comment, News
 from django.views.generic.detail import DetailView
+from django.core.paginator import Paginator
+from django.db.models import Q
+from django_filters.views import FilterView
+from .filters import NewsFilter
 
 def home(request):
     # Ваш код для главной страницы здесь
@@ -30,22 +34,31 @@ def comment_list(request):
 # Class-based view for News model
 class NewsListView(ListView):
     model = News
-    template_name = 'flatpages/default.html'  # путь к шаблону default.html
-    context_object_name = 'news_items'  # имя переменной в контексте
-    ordering = ['-date']  # сортировка новостей по дате
+    template_name = 'news/news_list.html'  # Обновленный путь к шаблону
+    context_object_name = 'news_items'
+    ordering = ['-date']
+    paginate_by = 10
+    filterset_class = NewsFilter
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['news_items'] = News.objects.all().order_by('-date')
-        return context
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q')
+        if query:
+            queryset = queryset.filter(
+                Q(title__icontains=query) |
+                Q(content__icontains=query)
+            )
+        return queryset
 
 def contact_view(request):
     return render(request, 'economical_news/contact.html')
 
 class NewsDetailView(DetailView):
     model = News
-    template_name = 'flatpages/default.html'
+    template_name = 'economical_news/news_detail.html'  # Обновленный путь к шаблону
     context_object_name = 'news_item'
 
-
-
+# Функция поиска новостей
+def search_news(request):
+    news_filter = NewsFilter(request.GET, queryset=News.objects.all())
+    return render(request, 'economical_news/search_results.html', {'filter': news_filter})

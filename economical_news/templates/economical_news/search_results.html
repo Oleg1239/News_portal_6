@@ -1,0 +1,19 @@
+<!-- search_results.html -->
+
+
+{% block content %}
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Искать</button>
+</form>
+
+<ul>
+    {% for news in filter.qs %}
+        <li>
+            <a href="{% url 'news_detail' news.pk %}">{{ news.title }}</a>
+        </li>
+    {% empty %}
+        <li>Новостей не найдено.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
