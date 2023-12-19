@@ -30,6 +30,16 @@
                         <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
                     </li>
                     <!-- Добавьте дополнительные ссылки по мере необходимости -->
+                    <!-- Ссылки для входа и выхода -->
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Выход</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Вход</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
@@ -55,4 +65,3 @@
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
-

@@ -4,9 +4,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('economical_news.urls')),  # Это должно ссылаться на файл urls.py в вашем приложении
-    # Другие глобальные маршруты...
+    path('', include('economical_news.urls')),  # Включите URL-адреса вашего приложения
 ]
-
-
-
